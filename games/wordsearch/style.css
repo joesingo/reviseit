@@ -1,0 +1,44 @@
+#game_area table {
+	margin:auto;
+	border-collapse:collapse;
+	font-family:"Courier New",monospace;
+	font-size:20px;
+}
+
+#game_area table td::selection {
+	background:white;
+}
+
+#game_area td {
+	cursor:pointer;
+	width:25px;
+	height:25px;
+	padding:0;
+}
+
+#words_found_div ul {
+	padding:0;
+	margin-top:5px;
+}
+
+#words_found_div li {
+	display:inline;
+	list-style:none;
+}
+
+#words_found_div li::after {
+	content:", ";
+}
+
+#end_game_div {
+	display:none;
+}
+
+.hovered {
+	text-decoration:underline;
+}
+
+.selected {
+	color:black;
+	font-weight:bold;
+}

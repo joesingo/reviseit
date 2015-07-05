@@ -1,0 +1,60 @@
+body {
+	overflow:hidden;
+	color:white;
+}
+
+#game {
+	height:100%;
+	width:100%;
+}
+
+#game td {
+	height:50%;
+	width:50%;
+	font-size:2em;
+	text-align:center;
+	vertical-align:middle;
+	cursor:pointer;
+}
+
+#question_wrapper {
+	width:100%;
+	text-align:center;
+	font-size:2.3em;
+	position:absolute;
+	top:0;
+}
+
+#question {
+	background:black;
+	border:4px solid white;
+	padding:10px;
+	display:inline-block;
+	opacity:0.7;
+}
+
+#message_div {
+	width:100%;
+	height:85px;
+	position:fixed;
+	top:50%;
+	margin-top:-40px;
+	font-size:3em;
+	text-align:center;
+	display:table;
+	cursor:pointer;
+}
+
+#message_div span {
+	display:table-cell;
+	width:100%;
+	height:100%;
+	vertical-align:middle;
+}
+
+canvas {
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:-1;
+}

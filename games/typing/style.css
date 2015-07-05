@@ -1,0 +1,23 @@
+#definition {
+	min-height:40px;
+	font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+	letter-spacing:2px;
+	word-wrap:break-word;
+}
+
+.statistic_span {
+	font-weight:bold;
+}
+
+#stats_p {
+	font-size:18px;
+}
+
+#final_score {
+	font-size:30px;
+}
+
+.heart {
+	height:30px;
+	padding:10px;
+}

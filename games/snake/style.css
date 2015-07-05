@@ -1,0 +1,61 @@
+* {
+	-moz-box-sizing:    border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing:        border-box;
+}
+
+body {
+	background:black;
+	color:white;
+	font-family:"Gill Sans MS",sans-serif;
+}
+
+#canvasdiv {
+	text-align:center;
+}
+
+#canvasdiv canvas {
+	border:3px solid white;
+}
+
+#question {
+	text-align:center;
+	font-size:30px;
+	font-weight:bold;
+}
+
+#optionslist {
+	list-style:upper-latin;
+	text-align:center;
+	padding-left:0;
+}
+
+#optionslist li {
+	display:inline-block;
+	width:200px;
+	padding:8px 0;
+}
+
+#continuediv, #endgamediv {
+	color:white;
+	
+	border:5px solid white;
+	border-radius:15px;
+	
+	width:400px;
+	position:absolute;
+	left:50%;
+	margin-left:-200px;
+	top:20%;
+	
+	padding:10px;
+	
+	font-size:1.3em;
+	text-align:center;
+}
+
+#round_time {
+	padding-top:15px;
+	margin:auto;
+	width:600px; /*NEEDS TO BE SAME WIDTH AS CANVAS*/
+}

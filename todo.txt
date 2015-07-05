@@ -1,0 +1,12 @@
+-do error thing in include file to easily integrate into whole site
+
+to do now:
+
+	-scores
+		-see scoresheet
+
+to do later:
+
+	-save correct/incorrect for each term
+
+	-fix snake so you cannot play again whilst score is saving
