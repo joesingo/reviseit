@@ -4,9 +4,9 @@
 <html>
 
 <head>
-	
+
 	<?php include("$_SERVER[DOCUMENT_ROOT]/includes/head.php"); ?>
-	
+
 	<title>Home | Revise it</title>
 
 	<link rel="stylesheet" type="text/css" href="/styles/main_style.css" />
@@ -16,9 +16,9 @@
 </head>
 
 <body>
-	
+
 	<?php include("$_SERVER[DOCUMENT_ROOT]/includes/header.php"); ?>
-	
+
 	<div id="content">
 
 		<?php
@@ -26,6 +26,10 @@
 			$res = $m->query($query)->fetch_all(MYSQL_ASSOC);
 
 			echo "<h2>Hello " . ($res ? $res[0]["name"] : "") . "</h2>";
+
+			if (isset($_GET["thanks"])) {
+				echo "<p>Thanks!</p>";
+			}
 		?>
 
 		<div class="big">
