@@ -2,6 +2,7 @@
 
 if (isset($_POST["username"])) {
 	include("$_SERVER[DOCUMENT_ROOT]/includes/database.php");
+	include("$_SERVER[DOCUMENT_ROOT]/includes/email.php");
 
 	//LIKE IN LOGIN FILE, USER WILL ONLY STAY ON THIS PAGE IF THERE WAS ERROR CREATING ACCOUNT,
 	///SO SET IT TRUE HERE
@@ -15,6 +16,8 @@ if (isset($_POST["username"])) {
 	$query = "INSERT INTO users VALUES (null,'$username','$password','$name','$email')";
 	$res = $m->query($query);
 	if ($res) {
+		send_email("Reviseit user creation", "User " . $username . " created");
+
 		header("Location: http://$_SERVER[HTTP_HOST]/login");
 		exit();
 	}
