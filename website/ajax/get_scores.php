@@ -5,11 +5,11 @@
 include("$_SERVER[DOCUMENT_ROOT]/includes/set_auth.php");
 
 if (isset($_GET["gid"])) {
-	
+
 	$game_id = mysqli_real_escape_string($m, $_GET["gid"]);
 
 	$query = "SELECT date, score FROM scores WHERE userid='$user_id' AND setid='$set_id' AND gameid='$game_id'";
-	$res = $m->query($query)->fetch_all(MYSQL_ASSOC);
+	$res = $m->query($query)->fetch_all(MYSQLI_ASSOC);
 
 	if ($res) {
 		echo "[";

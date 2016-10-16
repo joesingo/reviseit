@@ -2,7 +2,7 @@
 
 if (isset($_POST["username"]) and isset($_POST["password"])) {
 	include ("$_SERVER[DOCUMENT_ROOT]/includes/database.php");
-	
+
 	//FLAGS FOR ANY ERRORS
 	$db_error = false;
 
@@ -10,25 +10,25 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 	//SO ASSUME THERE HAS BEEN TO AVIOD LOADS OF ELSES DOING $login_error = true EVERYWHERE
 	//(ALTHOUGH IT COULD BE DB ACCESS ERROR)
 	$login_error = true;
-	
+
 	$username = mysqli_real_escape_string($m, $_POST["username"]);
 	$password = mysqli_real_escape_string($m, $_POST["password"]);
-	
+
 	$query = "SELECT id, password FROM users WHERE username='$username'";
-	$res = $m->query($query)->fetch_array(MYSQL_ASSOC);
-		
+	$res = $m->query($query)->fetch_array(MYSQLI_ASSOC);
+
 	if (count($res) != 0) {
-	
+
 		$id = $res["id"];
 		$hash = $res["password"];
-		
+
 		if ( crypt($password,'$1$2$3') == $hash ) {
-		
+
 			$time = microtime(true);
 			$query = "INSERT INTO sessions VALUES ($id, $time) ON DUPLICATE KEY UPDATE time=VALUES(time)";
-			
+
 			$res = $m->query($query);
-			
+
 			if ($res) {
 				session_start();
 				$_SESSION["time"] = $time;
@@ -65,7 +65,7 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 <html>
 
 <head>
-	
+
 	<?php include("$_SERVER[DOCUMENT_ROOT]/includes/head.php"); ?>
 
 	<title>Login | Revise it</title>
@@ -90,16 +90,16 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 </head>
 
 <body>
-	
+
 	<?php include("$_SERVER[DOCUMENT_ROOT]/includes/no_link_header.php"); ?>
-	
+
 	<div id="content">
-		
+
 		<h2>Log in</h2>
 		<form action="/login/index.php" method="POST">
-			
+
 			<?php
-				
+
 				if (isset($_GET["nli"])) {
 					echo "<p class='error'>You must be logged in to access this page</p>";
 				}
@@ -107,7 +107,7 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 				if (isset($login_error) and $login_error == true) {
 					echo "<p class='error'>Incorrect username/password</p>";
 				}
-				
+
 				if (isset($db_error) and $db_error == true) {
 					echo "<p class='error'>Error logging in :(</p>";
 				}
@@ -116,7 +116,7 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 					$page = isset($_GET["page"]) ? $_GET["page"] : $_POST["page"];
 					echo "<input type='hidden' name='page' value='$page' />";
 				}
-			
+
 			?>
 
 			<p><input type="text" name="username" placeholder="Username" /></p>
@@ -128,9 +128,9 @@ if (isset($_POST["username"]) and isset($_POST["password"])) {
 		<p>
 			(or <a href="/create_account" title="Create account">create account</a>)
 		</p>
-		
+
 		<?php include("$_SERVER[DOCUMENT_ROOT]/includes/footer.php"); ?>
-		
+
 	</div>
 </body>
 

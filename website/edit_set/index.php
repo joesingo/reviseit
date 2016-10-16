@@ -3,14 +3,14 @@
 include("$_SERVER[DOCUMENT_ROOT]/includes/set_owner_auth.php");
 
 $terms_query = "SELECT id, term, def FROM terms WHERE setid='$set_id'; ";
-$set_query = "SELECT sets.name, sets.privacy, sets.userid, sets.created, sets.edited, count(terms.id) AS termcount FROM sets JOIN terms ON (terms.setid=sets.id) WHERE sets.id='$set_id' GROUP BY sets.id";	
+$set_query = "SELECT sets.name, sets.privacy, sets.userid, sets.created, sets.edited, count(terms.id) AS termcount FROM sets JOIN terms ON (terms.setid=sets.id) WHERE sets.id='$set_id' GROUP BY sets.id";
 $privacy_query = "SELECT privacy_link.userid, users.username FROM privacy_link, users WHERE privacy_link.setid='$set_id' AND privacy_link.userid=users.id";
 $tags_query = "SELECT tags.name, tag_link.tagid FROM tags, tag_link WHERE tag_link.setid='$set_id' AND tag_link.tagid=tags.id";
 
-$terms_res = $m->query($terms_query)->fetch_all(MYSQL_ASSOC);
-$set_res = $m->query($set_query)->fetch_all(MYSQL_ASSOC);
-$privacy_res = $m->query($privacy_query)->fetch_all(MYSQL_ASSOC);
-$tags_res = $m->query($tags_query)->fetch_all(MYSQL_ASSOC);
+$terms_res = $m->query($terms_query)->fetch_all(MYSQLI_ASSOC);
+$set_res = $m->query($set_query)->fetch_all(MYSQLI_ASSOC);
+$privacy_res = $m->query($privacy_query)->fetch_all(MYSQLI_ASSOC);
+$tags_res = $m->query($tags_query)->fetch_all(MYSQLI_ASSOC);
 
 if (!$terms_res or !$set_res) {
 	header("Location: http://$_SERVER[HTTP_HOST]/error.php?e=badID");
@@ -25,14 +25,14 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 <html>
 
 <head>
-	
+
 	<?php include("$_SERVER[DOCUMENT_ROOT]/includes/head.php"); ?>
 
 	<title>Edit '<?php echo $set_res[0]["name"]; ?>' | Revise it</title>
 
 	<link rel="stylesheet" type="text/css" href="/styles/main_style.css" />
 	<style type="text/css">
-				
+
 		#term_def_area {
 			display:table;
 			margin:auto;
@@ -55,7 +55,7 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 		#term_def_area > div > div:last-child input {
 			text-align:left;
 		}
-		
+
 		#term_def_area input {
 			width:200px;
 		}
@@ -92,7 +92,7 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 		#sharing_with_span a::after, #current_tags_span a::after {
 			content:", ";
 		}
-		
+
 		#pop_up_textarea {
 			position:absolute;
 			width:275px;
@@ -106,7 +106,7 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 		button {
 			width:150px;
 		}
-		
+
 		#import_area textarea {
 			width:80%;
 			height:180px;
@@ -115,7 +115,7 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 		#import_separator_box {
 			width:30px;
 		}
-				
+
 		@media screen and (max-width: 550px) {
 
 			#term_def_area > div > div {
@@ -125,7 +125,7 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 			#term_def_area > div > div:first-child input {
 				text-align:left;
 			}
-			
+
 			#term_def_area button {
 				position:static;
 			}
@@ -133,7 +133,7 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 		}
 
 	</style>
-	
+
 	<script type="text/javascript" src="/scripts/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="/scripts/validate.js"></script>
 	<script type="text/javascript">
@@ -175,13 +175,13 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 					var id = $(el).attr("data-id");
 					addFormField("to_remove_IDs[]",id);
 				}
-				
+
 				//REMOVE FROM DOM
 				$(el).remove();
 				return true;
 			}
 		};
-		
+
 		//CREATE A TAG AND ADD IT TO CURRENT TAGS LIST
 		var createTag = function(name) {
 			$.ajax({
@@ -201,7 +201,7 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 				}
 			});
 		};
-				
+
 		$(document).ready(function(){
 
 			//HIDE THINGS
@@ -225,14 +225,14 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 					$(this).hide();
 				});
 			});
-			
+
 			//MAKE IMPORT BUTTON WORK
 			$("#import_button").click(function(){
 				$(this).hide();
 				$("#import_area").show();
 			});
 			$("#import_separator_box").val(";");
-			
+
 			//MAKE SETTINGS BUTTON WORK
 			$("#settings_button").click(function(){
 				$(this).hide();
@@ -254,11 +254,11 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 			//MAKE CORRECT PRIVACY BOX CHECKED WHEN PAGE LOADS
 			var privacy = "<?php echo $set_res[0]['privacy']; ?>";
 			$("input[value=" + privacy + "]").click();
-			
+
 			//MAKE EDIT SET NAME LINK WORK
 			$("#edit_set_name_link").click(function(){
 				$("#set_name_wrapper").attr("data-edited","true");
-				
+
 				var currentName = $("#set_name_wrapper h3").html();
 				$("#set_name_wrapper").html("<input type='text' />");
 				$("#set_name_wrapper input").val(currentName).focus().blur(function(){
@@ -309,7 +309,7 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 			//SEARCH FOR TAGS
 			$("#tag_div input").keyup(function(){
 				var searchQuery = $(this).val();
-				
+
 				$.ajax({
 					url: "/ajax/tag_search.php",
 					method: "POST",
@@ -320,7 +320,7 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 						$("#tag_search_results_area").html("Loading...")
 					}
 				}).done(function(res){
-					
+
 					//IF NO RESULTS OFFER TO CREATE TAG
 					if (res == "No results") {
 						var html = "<p>No results for " + searchQuery + "</p><p>Do you want to <a id='create_tag_link'>create a tag for " + searchQuery + "</a>?</p>";
@@ -348,12 +348,12 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 			$(document).on("click","#sharing_with_span a, #current_tags_span a",function(){
 				$(this).remove();
 			})
-			
+
 			//SET EDITED FLAG WHEN TERM OR DEF IS CHANGED
 			$("#term_def_area > div > div input").change(function(){
 				$(this).parent().parent().attr("data-edited","true");
 			});
-			
+
 			//REMOVE TERM
 			$("#term_def_area button").click(function(){
 				removeTerm( $(this).parent() );
@@ -372,7 +372,7 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 			//IMPORT TERMS
 			$("#import_area button").click(function(){
 				if (validate({presence: $("#import_separator_box")})) {
-					
+
 					var sep = $("#import_separator_box").val();
 					var split = $("#import_area textarea").val().replace(/['"]/g,"").split(sep);
 
@@ -422,7 +422,7 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 					addFormField("edited_terms[]",term);
 					addFormField("edited_defs[]",def);
 				})
-				
+
 				//EDITED SET NAME (IF EDITED)
 				if ($("#set_name_wrapper").attr("data-edited") === "true") {
 					var newName = $("#set_name_wrapper h3").html();
@@ -453,13 +453,13 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 </head>
 
 <body>
-	
+
 	<?php include("$_SERVER[DOCUMENT_ROOT]/includes/header.php"); ?>
-	
+
 	<div id="content">
-	
+
 		<h2>Edit Set</h2>
-		
+
 		<div id="set_name_wrapper">
 			<h3><?php echo $set_res[0]["name"]; ?></h3>
 		</div>
@@ -477,7 +477,7 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 		<p class="small">
 			Tip: Double click to get a bigger box!
 		</p>
-		
+
 		<!--MAIN SECTION: TYPE IN TERMS AND DEFS INTO TEXTBOXES-->
 		<section>
 			<p class="error" id="remove_error">You must have at least one term!</p>
@@ -497,11 +497,11 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 
 			<div><button id="add_term_button">Add term</button></div>
 		</section>
-		
+
 		<hr />
-		
+
 		<button id="import_button">Import terms</button>
-		
+
 		<!--IMPORT TERMS AND DEFS BY COPY AND PASTE-->
 		<section id="import_area">
 			<p>
@@ -512,11 +512,11 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 			<p><label for="import_separator_box">Separator: <input type="text" id="import_separator_box" /></label></p>
 			<p><button>Add</button></p>
 		</section>
-		
+
 		<hr />
-		
+
 		<button id="settings_button">Edit settings</button>
-		
+
 		<!--PRIVACY AND TAGS SECTION-->
 		<section id="settings_area">
 
@@ -542,7 +542,7 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 					(click to remove)
 				</p>
 			</div>
-			
+
 			<hr />
 
 			<div id="tag_div">
@@ -563,15 +563,15 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/date.php")
 			</div>
 
 		</section>
-		
+
 		<hr />
 
 		<form action="save.php" method="POST">
 			<button>Save</button>
 		</form>
-		
+
 		<?php include("$_SERVER[DOCUMENT_ROOT]/includes/footer.php"); ?>
-		
+
 	</div>
 
 	<textarea id="pop_up_textarea"></textarea>

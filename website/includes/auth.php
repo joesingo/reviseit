@@ -28,7 +28,7 @@ else {
 }
 
 $query = "SELECT time FROM sessions WHERE time='$time' AND userid=$user_id";
-$res = $m->query($query)->fetch_all(MYSQL_ASSOC);
+$res = $m->query($query)->fetch_all(MYSQLI_ASSOC);
 
 if (count($res) != 1) {
 	header("Location: $redirect_url");

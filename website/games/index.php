@@ -67,8 +67,8 @@ if (isset($_GET["gid"])) {
 	$games_query = "SELECT name, path, min_terms FROM games WHERE id='$game_id'";
 	$terms_query = "SELECT id, term, def FROM terms WHERE setid='$set_id'";
 
-	$games_res = $m->query($games_query)->fetch_all(MYSQL_ASSOC);
-	$terms_res = $m->query($terms_query)->fetch_all(MYSQL_ASSOC);
+	$games_res = $m->query($games_query)->fetch_all(MYSQLI_ASSOC);
+	$terms_res = $m->query($terms_query)->fetch_all(MYSQLI_ASSOC);
 
 	if (!$games_res) {
 		header("Location: http://$_SERVER[HTTP_HOST]/error.php?e=badGID");
@@ -95,7 +95,7 @@ else {
 <html>
 
 <head>
-	
+
 	<?php include("$_SERVER[DOCUMENT_ROOT]/includes/head.php"); ?>
 
 	<title><?php echo $games_res[0]["name"]; ?> | Revise it</title>
@@ -151,7 +151,7 @@ else {
 
 				o += chr;
 			}
-			return o;		
+			return o;
 		}
 
 		function decode(t) {
@@ -198,12 +198,12 @@ else {
 		?>;
 
 	</script>
-			
+
 
 </head>
 
 <body>
-	
+
 	<?php include("$_SERVER[DOCUMENT_ROOT]/games/$game_path/index.php"); ?>
 
 </body>

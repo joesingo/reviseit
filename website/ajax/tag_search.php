@@ -2,12 +2,12 @@
 
 //OUTPUTS LIST OF TAGS FROM SEARCH
 
-include("$_SERVER[DOCUMENT_ROOT]/includes/database.php"); 
+include("$_SERVER[DOCUMENT_ROOT]/includes/database.php");
 
 $q = mysqli_real_escape_string($m, $_POST["q"]);
 $query = "SELECT id, name FROM tags WHERE name LIKE '$q%' ORDER BY name ASC";
 
-$res = $m->query($query)->fetch_all(MYSQL_ASSOC);
+$res = $m->query($query)->fetch_all(MYSQLI_ASSOC);
 
 if ($res) {
 	echo "<ul>";

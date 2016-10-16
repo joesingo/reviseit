@@ -23,7 +23,7 @@
 
 		<?php
 			$query = "SELECT name FROM users WHERE id='$user_id'";
-			$res = $m->query($query)->fetch_all(MYSQL_ASSOC);
+			$res = $m->query($query)->fetch_all(MYSQLI_ASSOC);
 
 			echo "<h2>Hello " . ($res ? $res[0]["name"] : "") . "</h2>";
 

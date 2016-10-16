@@ -5,8 +5,8 @@ include("$_SERVER[DOCUMENT_ROOT]/includes/set_auth.php");
 $set_query = "SELECT name FROM sets WHERE id='$set_id'";
 $terms_query = "SELECT term, def FROM terms WHERE setid='$set_id'";
 
-$set_res = $m->query($set_query)->fetch_all(MYSQL_ASSOC);
-$terms_res = $m->query($terms_query)->fetch_all(MYSQL_ASSOC);
+$set_res = $m->query($set_query)->fetch_all(MYSQLI_ASSOC);
+$terms_res = $m->query($terms_query)->fetch_all(MYSQLI_ASSOC);
 
 if (!$terms_res or !$set_res) {
 	header("Location: http://$_SERVER[HTTP_HOST]/error.php?e=termError"); //SNEAKY LIE- IF SET QUERY FAILS THEY WILL BE TOLD IT WAS TERM ERROR!
@@ -21,7 +21,7 @@ $set_name = $set_res[0]["name"];
 <html>
 
 <head>
-	
+
 	<?php include("$_SERVER[DOCUMENT_ROOT]/includes/head.php"); ?>
 
 	<title><?php echo $set_name; ?> | Revise it</title>
@@ -37,7 +37,7 @@ $set_name = $set_res[0]["name"];
 </head>
 
 <body>
-		
+
 	<div id="content">
 
 		<?php
@@ -49,7 +49,7 @@ $set_name = $set_res[0]["name"];
 			}
 
 		?>
-			
+
 	</div>
 </body>
 

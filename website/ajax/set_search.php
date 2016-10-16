@@ -33,17 +33,17 @@ $res = [];
 
 if (isset($_GET["your_sets"])) {
 	$your_sets_query = "$select FROM sets $join $tag_join WHERE sets.userid='$user_id' $where $group_by $order_by";
-	$res[] = $m->query($your_sets_query)->fetch_all(MYSQL_ASSOC);
+	$res[] = $m->query($your_sets_query)->fetch_all(MYSQLI_ASSOC);
 }
 
 if (isset($_GET["shared_all"])) {
 	$shared_all_query = "$username_select FROM sets $username_join $tag_join WHERE sets.privacy='all' AND sets.userid<>'$user_id' $where $group_by $order_by";
-	$res[] = $m->query($shared_all_query)->fetch_all(MYSQL_ASSOC);
+	$res[] = $m->query($shared_all_query)->fetch_all(MYSQLI_ASSOC);
 }
 
 if (isset($_GET["shared_some"])) {
 	$shared_some_query = "$username_select FROM sets $username_join $tag_join JOIN privacy_link ON (privacy_link.setid=sets.id AND privacy_link.userid='$user_id') WHERE sets.privacy='some' $where $group_by $order_by";
-	$res[] = $m->query($shared_some_query)->fetch_all(MYSQL_ASSOC);
+	$res[] = $m->query($shared_some_query)->fetch_all(MYSQLI_ASSOC);
 }
 
 $sets_found = false;
@@ -67,7 +67,7 @@ foreach ($res as $i) {
 		$output .= "$j[termcount] terms<br />";
 
 		$tag_query = "SELECT tags.name FROM tags, tag_link WHERE tag_link.setid=$j[id] AND tags.id=tag_link.tagid";
-		$tag_res = $m->query($tag_query)->fetch_all(MYSQL_ASSOC);
+		$tag_res = $m->query($tag_query)->fetch_all(MYSQLI_ASSOC);
 
 		if ($tag_res) {
 			$output .= "Tagged: ";

@@ -7,9 +7,9 @@ $set_query = "SELECT sets.name, sets.created, sets.edited, sets.userid, count(te
 $terms_query = "SELECT term, def FROM terms WHERE setid='$set_id'";
 $games_query = "SELECT id, name, path, save_scores FROM games";
 
-$set_res = $m->query($set_query)->fetch_all(MYSQL_ASSOC);
-$terms_res = $m->query($terms_query)->fetch_all(MYSQL_ASSOC);
-$games_res = $m->query($games_query)->fetch_all(MYSQL_ASSOC);
+$set_res = $m->query($set_query)->fetch_all(MYSQLI_ASSOC);
+$terms_res = $m->query($terms_query)->fetch_all(MYSQLI_ASSOC);
+$games_res = $m->query($games_query)->fetch_all(MYSQLI_ASSOC);
 
 if (!$set_res or !$terms_res) {
 	header("Location: http://$_SERVER[HTTP_HOST]/error.php");
@@ -21,7 +21,7 @@ if (!$set_res or !$terms_res) {
 <html>
 
 <head>
-	
+
 	<?php include("$_SERVER[DOCUMENT_ROOT]/includes/head.php"); ?>
 
 	<title>View '<?php echo $set_res[0]["name"]; ?>' | Revise it</title>
@@ -111,9 +111,9 @@ if (!$set_res or !$terms_res) {
 </head>
 
 <body>
-	
+
 	<?php include("$_SERVER[DOCUMENT_ROOT]/includes/header.php"); ?>
-	
+
 	<div id="content">
 
 		<h2>View Set</h2>
@@ -349,9 +349,9 @@ if (!$set_res or !$terms_res) {
 			</script>
 
 		</section>
-	
+
 		<?php include("$_SERVER[DOCUMENT_ROOT]/includes/footer.php"); ?>
-		
+
 	</div>
 </body>
 

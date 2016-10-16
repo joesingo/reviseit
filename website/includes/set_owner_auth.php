@@ -14,7 +14,7 @@ if (!isset($_GET["sid"])) {
 $set_id = mysqli_real_escape_string($m, $_GET["sid"]);
 
 $query = "SELECT userid FROM sets WHERE id='$set_id'";
-$res = $m->query($query)->fetch_all(MYSQL_ASSOC);
+$res = $m->query($query)->fetch_all(MYSQLI_ASSOC);
 
 if ($res) {
 	if ($res[0]["userid"] != $user_id) {
