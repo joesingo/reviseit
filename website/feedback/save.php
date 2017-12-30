@@ -2,7 +2,7 @@
 
 if (isset($_POST["feedback"]) and isset($_POST["uid"])) {
 	include("$_SERVER[DOCUMENT_ROOT]/includes/database.php");
-	include("$_SERVER[DOCUMENT_ROOT]/includes/email.php");
+	// include("$_SERVER[DOCUMENT_ROOT]/includes/email.php");
 
 	$user_id = mysqli_real_escape_string($m, $_POST["uid"]);
 	$query = "SELECT username FROM users WHERE id='$user_id'";
@@ -18,7 +18,7 @@ if (isset($_POST["feedback"]) and isset($_POST["uid"])) {
 	file_put_contents("../../feedback.txt", $log, FILE_APPEND);
 
 	$subject = "Reviseit feedback from " . $username;
-	send_email($subject, $log);
+	// send_email($subject, $log);
 }
 
 header("Location: http://$_SERVER[HTTP_HOST]/?thanks");
