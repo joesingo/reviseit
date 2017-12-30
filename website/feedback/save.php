@@ -15,7 +15,8 @@ if (isset($_POST["feedback"]) and isset($_POST["uid"])) {
 
 	$date = date("d-m-Y H:i");
 	$log = $date . " - From user " . $username . ":\n" . $_POST["feedback"] . "\n\n";
-	file_put_contents("../../feedback.txt", $log, FILE_APPEND);
+	// TODO: Save the feedback!
+	// file_put_contents("../../feedback.txt", $log, FILE_APPEND);
 
 	$subject = "Reviseit feedback from " . $username;
 	// send_email($subject, $log);
