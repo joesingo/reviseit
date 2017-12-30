@@ -1,4 +1,3 @@
-CREATE DATABASE reviseit;
 USE reviseit;
 
 CREATE TABLE `games` (

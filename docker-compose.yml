@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  webserver:
+    build: .
+    ports:
+      - "9301:80"
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./db_setup.sql:/db_setup.sql
+    environment:
+      - MSQL_ROOT_HOST=db
+      - MYSQL_DATABASE=reviseit
+      - MYSQL_ROOT_PASSWORD=reviseitroot
