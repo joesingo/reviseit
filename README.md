@@ -1,7 +1,7 @@
 # reviseit
 A website to help students revise through quizzes and some simple games
 
-This was made for my A-level computing coursework in 2015
+This was made for my A-level computing coursework in 2014/2015
 
 The site is live at my personal website [here](http://reviseit.joesingo.co.uk)
 
@@ -27,3 +27,6 @@ docker ps | grep mysql
 
 docker exec -it <container ID> bash -c "mysql -uroot -previseitroot < /db_setup.sql"
 ```
+
+Note: I have seen some permission related errors in the MySQL container when the `db` directory is
+on an NTFS drive, so create `db` as a symlink to somewhere else if necessary...
