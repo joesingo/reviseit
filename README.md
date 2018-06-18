@@ -22,10 +22,10 @@ host in the root of the repo (directory will be created if it does not exist).
 When running for the first time, create the required tables in the DB:
 
 ```
-# Note container ID
-docker ps | grep mysql
+# Get container ID
+id=`docker ps -q --filter name=reviseit_db*`
 
-docker exec -it <container ID> bash -c "mysql -uroot -p${MYSQL_ROOT_PASSWORD} < /db_setup.sql"
+docker exec $id bash -c 'mysql -uroot -p${MYSQL_ROOT_PASSWORD} < /db_setup.sql'
 ```
 
 Note: I have seen some permission related errors in the MySQL container when the `db` directory is
