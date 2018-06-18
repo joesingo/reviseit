@@ -3,6 +3,8 @@ version: "3"
 services:
   webserver:
     build: .
+    environment:
+        - DB_PASSWORD=changeme
     ports:
       - "9301:80"
   db:
@@ -13,4 +15,4 @@ services:
     environment:
       - MSQL_ROOT_HOST=db
       - MYSQL_DATABASE=reviseit
-      - MYSQL_ROOT_PASSWORD=reviseitroot
+      - MYSQL_ROOT_PASSWORD=changeme
