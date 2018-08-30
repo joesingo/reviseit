@@ -3,8 +3,6 @@ A website to help students revise through quizzes and some simple games
 
 This was made for my A-level computing coursework in 2014/2015
 
-The site is live at my personal website [here](http://reviseit.joesingo.co.uk)
-
 **Update (Dec 2017):**
 The site can now be deployed with Docker. To run, install Docker and docker-compose, change the
 dummy DB password in `docker-compose.yml`, and from the root of the repo run:
@@ -30,3 +28,11 @@ docker exec $id bash -c 'mysql -uroot -p${MYSQL_ROOT_PASSWORD} < /db_setup.sql'
 
 Note: I have seen some permission related errors in the MySQL container when the `db` directory is
 on an NTFS drive, so create `db` as a symlink to somewhere else if necessary...
+
+## Screenshots
+
+![Quadrant game](screenshots/quadrant.png)
+![Shapes game](screenshots/shapes.png)
+![Snake](screenshots/snake.png)
+![Typing game](screenshots/typing-game.png)
+![Wordsearch](screenshots/wordsearch.png)
