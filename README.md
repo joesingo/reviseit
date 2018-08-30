@@ -31,8 +31,8 @@ on an NTFS drive, so create `db` as a symlink to somewhere else if necessary...
 
 ## Screenshots
 
-![Quadrant game](screenshots/quadrant.png)
-![Shapes game](screenshots/shapes.png)
-![Snake](screenshots/snake.png)
-![Typing game](screenshots/typing-game.png)
-![Wordsearch](screenshots/wordsearch.png)
+<img alt="Quadrant game" src="screenshots/quadrant.png" width="500" />
+<img alt="Shapes game" src="screenshots/shapes.png" width="500" />
+<img alt="Snake" src="screenshots/snake.png" width="500" />
+<img alt="Typing game" src="screenshots/typing-game.png" width="500" />
+<img alt="Wordsearch" src="screenshots/wordsearch.png" width="500" />
